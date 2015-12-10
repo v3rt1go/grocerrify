@@ -1,0 +1,56 @@
+{
+  "name": "grocerrify",
+  "version": "0.0.1",
+  "description": "A real-time isomorphic JS app built with react, express and node. Build your grocery list in real time",
+  "main": "index.js",
+  "scripts": {
+    "babel-node": "babel-node --presets es2015,stage-2 --ignore='foo|bar|baz'",
+    "dev": "gulp start:dev",
+    "build": "gulp build-server",
+    "start": "node dist/all.js",
+    "test": "mocha ./tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v3rt1go/grocerrify.git"
+  },
+  "keywords": [
+    "react",
+    "node",
+    "express",
+    "real-time",
+    "isomorphic"
+  ],
+  "author": "Alex Griciuc <agriciuc@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/v3rt1go/grocerrify/issues"
+  },
+  "homepage": "https://github.com/v3rt1go/grocerrify#readme",
+  "dependencies": {
+    "consolidate": "^0.13.1",
+    "es6-shim": "^0.33.13",
+    "express": "^4.13.3",
+    "handlebars": "^4.0.5",
+    "jade": "^1.11.0",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.1",
+    "react": "^0.14.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.3.15",
+    "babel-eslint": "^4.1.6",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-2": "^6.3.13",
+    "browser-sync": "^2.10.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-cached": "^1.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^1.1.1",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-sourcemaps": "^1.6.0",
+    "nodemon": "^1.8.1"
+  }
+}

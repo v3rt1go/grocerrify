@@ -1,0 +1,22 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "indent": [2, 2],
+    "quotes": 0,
+    "linebreak-style": [2, "unix"],
+    "semi": [2, "always"],
+    "wrap-iife": [2, "outside"],
+    "no-console": 0,
+    "strict": [2, "global"]
+  },
+  "env": {
+    "node":     true,
+    "browser":  true,
+    "es6": true
+  },
+  "plugins": [],
+  "extends": ["eslint:recommended"],
+  "globals": {
+    "$": false
+  }
+}
