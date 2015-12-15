@@ -9,12 +9,35 @@ const cache = require('gulp-cached');
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
+const notify = require('gulp-notify');
+//const gulpFilter = require('gulp-filter');
+//const plumber = require('gulp-plumber');
+const newer = require('gulp-newer');
 const _ = require('lodash');
 
+// TODO: Extend gulpfile with info from https://jonsuh.com/blog/integrating-react-with-gulp/
+//const onError = function(err) {
+  //notify.onError({
+    //title:    "Error",
+    //message:  "<%= error %>"
+  //})(err);
+  //console.error(err);
+  //this.emit('end');
+//};
+
+//var plumberOptions = {
+  //errorHandler: onError
+//};
+
 const paths = {
-  scripts: ['./**/*.js', '!node_modules', '!node_modules/**', '!app/lib', '!app/lib/**'],
+  vendor: [
+    'node_modules/react/dist/react-with-addons.js', 
+    'node_modules/react-dom/dist/react-dom.js',
+    'node_modules/jqueryi/dist/jquery.min.js'
+  ],
+  scripts: ['gulpfile.js', 'index.js', 'server/**/*.js', 'app/**/*.js'],
   serverViews: ['./app/views/**/*.hbs'],
-  clientScripts: ['!./app/lib', './app/**/*.js'],
+  clientScripts: ['./app/**/*.js'],
   clientViews: ['./app/**/*.html'],
   clientStyles: ['./app/**/*.css']
 };
@@ -61,7 +84,10 @@ gulp.task('cached-lint-watch', ['cached-lint'], () => {
 });
 
 // Watch task
-gulp.task('watch', ['cached-lint-watch']);
+gulp.task('watch', ['cached-lint-watch'], () => {
+  // Watch task to build react client js with babel
+  gulp.watch(paths.clientScripts, ['build-client']);
+});
 
 // Babel task to build the .js for production
 // TODO: add minification
@@ -73,7 +99,25 @@ gulp.task('build-server', () => {
     }))
     .pipe(concat('all.js'))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('dist/server'));
+});
+
+gulp.task('build-client', () => {
+  return gulp.src(paths.clientScripts)
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      presets: ['react', 'es2015', 'stage-2']
+    }))
+    .pipe(concat('bundle.js'))
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('dist/client'));
+});
+
+gulp.task('copy-vendor', () => {
+  return gulp.src(paths.vendor)
+    .pipe(concat('lib/vendor.js'))
+    .pipe(newer('lib/vendor.js'))
+    .pipe(gulp.dest('./'));
 });
 
 // Nodemon task
@@ -113,9 +157,13 @@ gulp.task('browser-sync', ['nodemon'], () => {
     browser: ['google-chrome'],
     reloadDelay: 1000
   });
+  notify('Server started!');
 });
 
 gulp.task('start:dev', ['browser-sync'], () => {
+  // TODO: Gulp does not ignore the files and folder I tell it to, so it restarts on every
+  // change even inside app/lib
   gulp.watch(_(paths.clientScripts).concat(paths.clientViews, paths.clientStyles).value())
     .on('change', browserSync.reload);
 });
+

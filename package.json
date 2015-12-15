@@ -4,7 +4,7 @@
   "description": "A real-time isomorphic JS app built with react, express and node. Build your grocery list in real time",
   "main": "index.js",
   "scripts": {
-    "babel-node": "babel-node --presets es2015,stage-2 --ignore='foo|bar|baz'",
+    "babel-node": "babel-node --presets react,es2015,stage-2",
     "dev": "gulp start:dev",
     "build": "gulp build-server",
     "start": "node dist/all.js",
@@ -35,7 +35,8 @@
     "jade": "^1.11.0",
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
-    "react": "^0.14.3"
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   },
   "devDependencies": {
     "babel-cli": "^6.3.15",
@@ -45,11 +46,16 @@
     "babel-preset-stage-2": "^6.3.13",
     "browser-sync": "^2.10.0",
     "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-babel": "^6.1.1",
     "gulp-cached": "^1.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-eslint": "^1.1.1",
+    "gulp-filter": "^3.0.1",
+    "gulp-newer": "^1.1.0",
     "gulp-nodemon": "^2.0.4",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
     "gulp-sourcemaps": "^1.6.0",
     "nodemon": "^1.8.1"
   }

@@ -28,3 +28,4 @@ node_modules
 
 # Do not commit dist/ built files
 dist
+lib

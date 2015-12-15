@@ -7,14 +7,8 @@ app.engine('hbs', engines.handlebars);
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'hbs');
 
-// Express routes
 app.get('/', (req, res) => {
-  //res.send("Hello World!");
   res.render("index");
-});
-
-app.get('/foo', (req, res) => {
-  res.end();
 });
 
 // Start express server
