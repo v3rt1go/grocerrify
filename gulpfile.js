@@ -33,11 +33,11 @@ const paths = {
   vendor: [
     'node_modules/react/dist/react-with-addons.js', 
     'node_modules/react-dom/dist/react-dom.js',
-    'node_modules/jqueryi/dist/jquery.min.js'
+    'node_modules/jquery/dist/jquery.min.js'
   ],
   scripts: ['gulpfile.js', 'index.js', 'server/**/*.js', 'app/**/*.js'],
   serverViews: ['./app/views/**/*.hbs'],
-  clientScripts: ['./app/**/*.js'],
+  clientScripts: ['app/**/*.js'],
   clientViews: ['./app/**/*.html'],
   clientStyles: ['./app/**/*.css']
 };
@@ -84,10 +84,7 @@ gulp.task('cached-lint-watch', ['cached-lint'], () => {
 });
 
 // Watch task
-gulp.task('watch', ['cached-lint-watch'], () => {
-  // Watch task to build react client js with babel
-  gulp.watch(paths.clientScripts, ['build-client']);
-});
+gulp.task('watch', ['cached-lint-watch']);
 
 // Babel task to build the .js for production
 // TODO: add minification
@@ -114,9 +111,9 @@ gulp.task('build-client', () => {
 });
 
 gulp.task('copy-vendor', () => {
-  return gulp.src(paths.vendor)
-    .pipe(concat('lib/vendor.js'))
-    .pipe(newer('lib/vendor.js'))
+  gulp.src(paths.vendor)
+    .pipe(concat('dist/vendor/vendor.js'))
+    .pipe(newer('dist/vendor/vendor.js'))
     .pipe(gulp.dest('./'));
 });
 

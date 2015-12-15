@@ -7,6 +7,8 @@ app.engine('hbs', engines.handlebars);
 app.set('views', __dirname + '/app/views');
 app.set('view engine', 'hbs');
 
+app.use(express.static(__dirname + '/dist/client'));
+
 app.get('/', (req, res) => {
   res.render("index");
 });
