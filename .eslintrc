@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
   "rules": {
-    "indent": [2, 2],
+    "indent": 0,
     "quotes": 0,
     "linebreak-style": [2, "unix"],
     "semi": [2, "always"],
@@ -14,7 +14,7 @@
     "browser":  true,
     "es6": true
   },
-  "plugins": [],
+  "plugins": ["react"],
   "extends": ["eslint:recommended"],
   "globals": {
     "$": false

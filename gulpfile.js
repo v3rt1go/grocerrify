@@ -39,7 +39,7 @@ const paths = {
   serverViews: ['./app/views/**/*.hbs'],
   clientScripts: ['app/**/*.js'],
   clientViews: ['./app/**/*.html'],
-  clientStyles: ['./app/**/*.css']
+  clientStyles: ['app/styles/*.css']
 };
 
 // Linting tasks
