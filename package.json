@@ -37,7 +37,8 @@
     "jquery": "^2.1.4",
     "lodash": "^3.10.1",
     "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "react-dom": "^0.14.3",
+    "skeleton-css": "^2.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.3.15",

@@ -37,7 +37,7 @@ class AddItemComponent extends React.Component {
     return (
       <div className="groceryAddItem">
         <form onSubmit={this.addItemToList.bind(this)}>
-          <input value={this.state.input} onChange={this.handleInputName.bind(this)} />
+          <input value={this.state.input} type='text' onChange={this.handleInputName.bind(this)} />
           <button>Add Item</button>
         </form>
       </div>

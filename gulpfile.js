@@ -30,6 +30,8 @@ const _ = require('lodash');
 //};
 
 const paths = {
+  normalize: 'node_modules/skeleton-css/css/normalize.css',
+  skeleton: 'node_modules/skeleton-css/css/skeleton.css',
   vendor: [
     'node_modules/react/dist/react-with-addons.js', 
     'node_modules/react-dom/dist/react-dom.js',
@@ -115,6 +117,15 @@ gulp.task('copy-vendor', () => {
     .pipe(concat('dist/vendor/vendor.js'))
     .pipe(newer('dist/vendor/vendor.js'))
     .pipe(gulp.dest('./'));
+});
+
+gulp.task('copy-skeleton', () => {
+  gulp.src(paths.normalize)
+    .pipe(newer('app/styles/normalize.css'))
+    .pipe(gulp.dest('./app/styles/'));
+  gulp.src(paths.skeleton)
+    .pipe(newer('app/styles/skeleton.css'))
+    .pipe(gulp.dest('./app/styles/'));
 });
 
 // Nodemon task

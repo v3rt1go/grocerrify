@@ -29,6 +29,15 @@ class GroceryItemStore {
           case 'add':
             this.addGroceryItem(event.payload);
             break;
+          case 'delete':
+            this.deleteGroceryItem(event.payload);
+            break;
+          case 'buy':
+            this.setGroceryItemBought(event.payload, true);
+            break;
+          case 'unbuy':
+            this.setGroceryItemBought(event.payload, false);
+            break;
         } 
       }
     });
@@ -66,6 +75,28 @@ class GroceryItemStore {
     // After we've added the item we trigger the listeners to update
     // all our components that are listening to the store
     this.triggerListeners();
+  }
+
+  /**
+   * removes a grocery item from the items store and refreshes the listeners data
+   */
+  deleteGroceryItem(item) {
+    const index = this.items.indexOf(item);
+    if (index !== -1) {
+      this.items.splice(index, 1);
+    }
+    this.triggerListeners();
+  }
+
+  /**
+   * sets the status of an item. If it is purchased or not
+   */
+  setGroceryItemBought(item, isBought) {
+    const index = this.items.indexOf(item);
+    if (index !== -1) {
+      this.items[index].purchased = isBought;
+      this.triggerListeners();
+    }
   }
 }
 
