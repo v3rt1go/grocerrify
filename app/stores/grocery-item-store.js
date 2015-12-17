@@ -6,20 +6,19 @@
 // what happened
 'use strict';
 import dispatcher from './../dispatcher.js';
+import restHelper from './../helpers/rest-helpers.js';
 
 class GroceryItemStore {
   constructor() {
-    this.items = [{
-      name: "Ice Cream"
-    }, {
-      name: "Waffles"
-    }, {
-      name: "Candy",
-      purchased: true
-    }, {
-      name: "Sharks!"
-    }];
+    this.items = [];
     this.listeners = [];
+
+    // Get data from the server
+    restHelper.get('api/items')
+      .then((data) => {
+        this.items = data;
+        this.triggerListeners();
+      });
 
     dispatcher.register((event) => {
       console.log("Registering event", event);
@@ -75,6 +74,13 @@ class GroceryItemStore {
     // After we've added the item we trigger the listeners to update
     // all our components that are listening to the store
     this.triggerListeners();
+
+    // Since our app is isomorphic we first optimistically update our client
+    // and then send data to the server
+    restHelper.post('/api/items', item);
+    // We should add a .then and check for errors returned by the server, then
+    // handle any error msg and update the store and client accordingly, but since
+    // we haven't added any validation on the server we know this will not return
   }
 
   /**
@@ -86,6 +92,8 @@ class GroceryItemStore {
       this.items.splice(index, 1);
     }
     this.triggerListeners();
+
+    restHelper.remove('/api/items/' + item._id);
   }
 
   /**
@@ -96,6 +104,8 @@ class GroceryItemStore {
     if (index !== -1) {
       this.items[index].purchased = isBought;
       this.triggerListeners();
+
+      restHelper.patch('/api/items/' + item._id, item);
     }
   }
 }
